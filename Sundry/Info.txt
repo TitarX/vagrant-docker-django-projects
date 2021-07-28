@@ -1,0 +1,55 @@
+> cd ../django-project1.site
+> mkdir app
+
+--------
+
+> sudo docker build .
+> sudo docker-compose build
+> sudo docker-compose run app sh -c "django-admin.py startproject app ."
+
+> nano app/app/settings.py
+> cp ../Sundry/views.py app/app/views.py
+> nano app/app/views.py
+> nano app/app/urls.py
+
+> sudo docker-compose up
+
+--------
+
+FOR APP/APP/SETTINGS.PY:
+
+import os
+
+ALLOWED_HOSTS = ['django-project1.site']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
+    }
+}
+
+--------
+
+FOR APP/APP/VIEWS.PY:
+
+...
+return HttpResponse('Проект 1')
+...
+
+--------
+
+FOR APP/APP/URLS.PY:
+
+...
+from . import views
+...
+
+...
+path('', views.index, name='index')
+...
+
+--------

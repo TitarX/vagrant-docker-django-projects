@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8888:80"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=project1
+      - DB_USER=user
+      - DB_PASS=secret
+    depends_on:
+      - db
+
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=project1
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=secret
