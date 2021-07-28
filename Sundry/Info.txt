@@ -1,3 +1,7 @@
+django-project1.site:8888
+
+--------
+
 > cd ../django-project1.site
 > mkdir app
 
@@ -36,20 +40,14 @@ DATABASES = {
 
 FOR APP/APP/VIEWS.PY:
 
-...
 return HttpResponse('Проект 1')
-...
 
 --------
 
 FOR APP/APP/URLS.PY:
 
-...
 from . import views
-...
 
-...
 path('', views.index, name='index')
-...
 
 --------
